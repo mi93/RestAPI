@@ -29,7 +29,7 @@ public class PostingService {
         return repository.findById(id)
                 .map(posting -> {
                     newPosting.setId(posting.getId());
-                    return repository.save(posting);
+                    return repository.save(newPosting);
                         });
     }
 
