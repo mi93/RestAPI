@@ -7,28 +7,33 @@ import java.util.Optional;
 
 @Service
 public class PostingService {
-    private final PostingRepository postingRepository;
+    private final PostingRepository repository;
 
-    public PostingService(PostingRepository postingRepository) {
-        this.postingRepository = postingRepository;
+    public PostingService(PostingRepository repository) {
+        this.repository = repository;
     }
 
     public List<Posting> getAll() {
-        return null;
+        return repository.findAll();
     }
 
     public Optional<Posting> getById(Long id) {
-        return null;
+        return repository.findById(id);
     }
 
     public Posting add(Posting posting) {
-        return null;
+        return repository.save(posting);
     }
 
-    public Optional<Posting> update(Long id, Posting posting) {
-        return null;
+    public Optional<Posting> update(Long id, Posting newPosting) {
+        return repository.findById(id)
+                .map(posting -> {
+                    newPosting.setId(posting.getId());
+                    return repository.save(posting);
+                        });
     }
 
     public void deleteById(long id) {
+        repository.deleteById(id);
     }
 }
