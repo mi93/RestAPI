@@ -2,6 +2,9 @@ package pl.kinx.kamilst.jobboard.postings;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/postings")
 public class PostingController {
@@ -12,8 +15,13 @@ public class PostingController {
     }
 
     @GetMapping("/{id}")
-    public String getById(@PathVariable String id) {
-        return "OK" + id;
+    public Posting getById(@PathVariable Long id) {
+        return new Posting(
+                id,
+                "Praca jako...",
+                new BigDecimal(15000),
+                LocalDate.now().plusMonths(1)
+        );
     }
 
     @PostMapping
